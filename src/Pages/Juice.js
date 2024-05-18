@@ -1,0 +1,17 @@
+import React from 'react'
+import { juice } from '../data';
+import SellingCard from '../Components/SellingCard';
+
+function Juice() {
+    return (
+        <div className='bg-[#f8f6f3d7] flex mx-auto gap-x-2 justify-evenly w-[90%] h-[88%] flex-wrap'>
+            {
+                juice.map((item) => {
+                    return <SellingCard item={item} />
+                })
+            }
+        </div>
+    )
+}
+
+export default Juice
