@@ -3,7 +3,7 @@ import { BsCurrencyDollar } from 'react-icons/bs'
 
 function ShowCard({ item }) {
 
-    console.log("Item in card : " + item);
+    // console.log("Item in card : " + item);
 
     return (
         <div className='flex flex-col mx-auto h-72 w-56 border-2 border-gray-200 justify-evenly rounded-md'>

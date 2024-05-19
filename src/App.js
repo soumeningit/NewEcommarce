@@ -34,8 +34,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/groceries" element={<Groceries isLoggedIn={isLoggedIn} />} />
-        <Route path="/everything" element={<Everything />} />
-        <Route path="/juice" element={<Juice />} />
+        <Route path="/everything" element={<Everything isLoggedIn={isLoggedIn} />} />
+        <Route path="/juice" element={<Juice isLoggedIn={isLoggedIn} />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About />} />
         <Route path="/from" element={<FormPage />} />

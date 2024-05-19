@@ -4,7 +4,7 @@ import { data } from '../data';
 import ShowCard from '../Components/ShowCard';
 import Footer from '../Components/Footer';
 
-function Everything() {
+function Everything({ isLoggedIn }) {
     const [searchTerm, setSearchTerm] = useState('');
     const [item, setItem] = useState(null);
     const [sliderValue, setSliderValue] = useState(10);
@@ -23,7 +23,7 @@ function Everything() {
 
     function checkMatch() {
         const matchedItems = data.filter(item => item.name.toLowerCase().includes(searchTerm.toLowerCase()));
-        console.log(matchedItems)
+        // console.log(matchedItems)
         if (matchedItems.length > 0) {
             // If there are matching items, display them
             setItem(matchedItems[0]);
@@ -55,7 +55,7 @@ function Everything() {
                 <div className='flex flex-row flex-wrap'>
                     {
                         price.map((item) => {
-                            return <SellingCard item={item} />
+                            return <SellingCard item={item} isLoggedIn={isLoggedIn} />
                         })
                     }
                 </div>
@@ -90,7 +90,7 @@ function Everything() {
             </div>
             <div className='flex flex-row flex-wrap w-[88%] mt-8 mx-auto'>
                 {data.map((item) => (
-                    <SellingCard key={item.id} item={item} />
+                    <SellingCard key={item.id} item={item} isLoggedIn={isLoggedIn} />
                 ))}
             </div>
 
