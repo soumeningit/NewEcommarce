@@ -11,6 +11,12 @@ function LogInPage(props) {
 
     let setIsLoggedIn = props.setIsLoggedIn;
 
+
+    // const handleLogInButton = () => {
+    //     // Perform login logic
+    //     handleLogin();
+    // };
+
     // console.log(formData);
 
     function changeHandeler(event) {

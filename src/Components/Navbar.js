@@ -27,6 +27,8 @@ function Navbar(props) {
     const isLoggedIn = props.isLoggedIn;
     const setIsLoggedIn = props.setIsLoggedIn;
 
+
+
     return (
         <div className='flex justify-between items-center p-4 bg-gradient-to-br from-astglobalcolor5'>
             <div>

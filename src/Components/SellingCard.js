@@ -13,20 +13,13 @@ function SellingCard({ item, isLoggedIn }) {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    function addToCart() {
-        dispatch(addProduct(item));
-    }
-
-
-    // function addtocartHandeler() {
-    //     dispatch(add(item))
-    //     toast.success("Item added to Cart");
-    // }
-
-    // function removeItemHandler() {
-    //     dispatch(remove(item.id))
-    //     toast.error("Item removed from Cart");
-    // }
+    const addToCart = () => {
+        if (isLoggedIn) {
+            dispatch(addProduct(item));
+        } else {
+            navigate("/login");
+        }
+    };
 
     return (
         <div className='flex flex-row rounded-lg m-4 gap-x-28 items-start shadow-lg p-4 bg-[#f8f6f3d7] '>
