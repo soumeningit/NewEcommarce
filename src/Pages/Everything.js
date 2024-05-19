@@ -84,7 +84,7 @@ function Everything({ isLoggedIn }) {
             <div className='mx-auto p-4 bg-[rgba(239,237,235,0.78)] rounded-md shadow-md'>
                 {
                     item &&
-                    <ShowCard item={item} />
+                    <ShowCard item={item} isLoggedIn={isLoggedIn} />
                 }
 
             </div>

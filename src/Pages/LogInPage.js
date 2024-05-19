@@ -11,14 +11,6 @@ function LogInPage(props) {
 
     let setIsLoggedIn = props.setIsLoggedIn;
 
-
-    // const handleLogInButton = () => {
-    //     // Perform login logic
-    //     handleLogin();
-    // };
-
-    // console.log(formData);
-
     function changeHandeler(event) {
         setFormData((prevData) => {
             return ({
@@ -49,24 +41,31 @@ function LogInPage(props) {
         const userData = data.filter((item) => item && item.email === formData.email);
         const passKey = userData.map((item) => item.password);
 
+        // console.log(userData);
         // console.log("password");
         // console.log(passKey);
 
-        if (passKey[0] === formData.password) {
-            toast.success("Login Successfull");
-            setIsLoggedIn(true);
-            navigate("/");
+        if (userData.length > 0) {
+            if (passKey[0] === formData.password) {
+                toast.success("Login Successfull");
+                setIsLoggedIn(true);
+                navigate("/");
+            }
+            else {
+                toast.error("Email or Password Missmatch");
+                setFormData((prevData) => {
+                    return ({
+                        ...prevData,
+                        email: "",
+                        password: "",
+
+                    })
+                })
+            }
         }
         else {
-            toast.error("Email or Password Missmatch");
-            setFormData((prevData) => {
-                return ({
-                    ...prevData,
-                    email: "",
-                    password: "",
-
-                })
-            })
+            toast.error("User not found");
+            navigate("/");
         }
     }
 

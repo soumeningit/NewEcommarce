@@ -1,14 +1,14 @@
 import React from 'react'
 import { BsCurrencyDollar } from "react-icons/bs";
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { addProduct } from '../Redux/Slice/CartSlice';
 import { useNavigate } from 'react-router-dom';
 
 function SellingCard({ item, isLoggedIn }) {
 
     // console.log("Logged in selling card : " + isLoggedIn);
-    const cart = useSelector((state) => state.cart);
-    console.log(cart);
+    // const cart = useSelector((state) => state.cart);
+    // console.log(cart);
 
     const dispatch = useDispatch();
     const navigate = useNavigate();

@@ -25,9 +25,8 @@ function Navbar(props) {
     // console.log("Value is  : " + value);
 
     const isLoggedIn = props.isLoggedIn;
-    const setIsLoggedIn = props.setIsLoggedIn;
 
-
+    const isSignUp = props.isSignUp;
 
     return (
         <div className='flex justify-between items-center p-4 bg-gradient-to-br from-astglobalcolor5'>
@@ -88,13 +87,26 @@ function Navbar(props) {
                 </NavLink>
 
                 <div className='flex gap-x-2'>
-                    <NavLink to="/signup">
-                        <button
-                            className='px-2 py-1 rounded-md border border-gary-500 text-md bg-slate-400 text-gray-200 hover:bg-slate-800 transition-all'
-                        >
-                            SignUp
-                        </button>
-                    </NavLink>
+                    {
+                        isSignUp &&
+                        <NavLink to="/signup">
+                            <button
+                                className='px-2 py-1 rounded-md border border-gary-500 text-md bg-slate-400 text-gray-200 hover:bg-slate-800 transition-all'
+                            >
+                                SignUp
+                            </button>
+                        </NavLink>
+                    }
+                    {
+                        !isSignUp &&
+                        <NavLink to="/signout">
+                            <button
+                                className='px-2 py-1 rounded-md border border-gary-500 text-md bg-slate-400 text-gray-200 hover:bg-slate-800 transition-all'
+                            >
+                                SignOut
+                            </button>
+                        </NavLink>
+                    }
 
                     {
                         !isLoggedIn &&

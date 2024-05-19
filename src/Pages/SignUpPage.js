@@ -1,15 +1,17 @@
 import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom';
-import { Home } from '../Pages/Home'
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
+import { useDispatch } from 'react-redux';
 
 
-function SignUpPage() {
+function SignUpPage({ setIsSignUp }) {
 
     const [formData, setFormData] = useState({ firstName: "", lastName: "", email: "", password: "", confirmPassword: "" });
 
     const navigate = useNavigate();
+
+    const dispatch = useDispatch();
 
     function changeHandeler(event) {
         setFormData((prevData) => {
@@ -44,6 +46,7 @@ function SignUpPage() {
 
         if (sameUser) {
             alert("You already signed up");
+            dispatch(setIsSignUp(false));
             navigate("/");
         }
         else {
@@ -54,6 +57,7 @@ function SignUpPage() {
                 toast.success("Successfully loged in");
                 setFormData({ firstName: "", lastName: "", email: "", password: "", confirmPassword: "" });
                 navigate("/login");
+                dispatch(setIsSignUp(true));
             } else {
                 toast.error("Passwords do not match, please re-enter your password");
                 setFormData((prevData) => ({
