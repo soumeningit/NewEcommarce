@@ -2,6 +2,7 @@ import React from 'react'
 import organicProduct from '../image/organic-products-hero.png'
 import { IoCartOutline } from "react-icons/io5";
 import leaf from '../image/logo-leaf-new.png'
+import { NavLink } from 'react-router-dom';
 
 
 function HomeContent() {
@@ -19,9 +20,11 @@ function HomeContent() {
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                         Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.
                     </p>
-                    <button className='bg-green-500 flex px-2 py-2 rounded-md text-white hover:bg-green-400 transition-all mt-16'>
-                        <IoCartOutline className='m-1' /> <span className=''>Shop Now</span>
-                    </button>
+                    <NavLink to="/groceries">
+                        <button className='bg-green-500 flex px-2 py-2 rounded-md text-white hover:bg-green-400 transition-all mt-16'>
+                            <IoCartOutline className='m-1' /> <span className=''>Shop Now</span>
+                        </button>
+                    </NavLink>
                 </div>
             </div>
         </div >

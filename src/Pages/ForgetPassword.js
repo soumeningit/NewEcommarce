@@ -1,23 +1,14 @@
-import React, { useEffect } from 'react'
-import { NavLink, useNavigate } from 'react-router-dom';
+import React from 'react'
+import { NavLink } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 
-function LogInPage(props) {
+function ForgetPassword() {
 
-    const [formData, setFormData] = useState({ email: "", password: "" });
+    const [formData, setFormData] = useState({ email: "", password: "", confirmPassword: "" });
 
     const navigate = useNavigate();
-
-    let setIsLoggedIn = props.setIsLoggedIn;
-
-
-    // const handleLogInButton = () => {
-    //     // Perform login logic
-    //     handleLogin();
-    // };
-
-    // console.log(formData);
 
     function changeHandeler(event) {
         setFormData((prevData) => {
@@ -28,37 +19,14 @@ function LogInPage(props) {
         })
     }
 
-    function submtBtnhandler(event) {
+    function submitBtnhandler(event) {
         event.preventDefault();
         // console.log(formData);
-        fetchData(formData);
-    }
-
-    function fetchData() {
-        const data = JSON.parse(window.localStorage.getItem("users"));
-        // console.log(data);
-
-        // const userData = data.filter((item) => item.name.includes(formData.email))
-        // console.log(userData.map((item) => item.email));
-
-        if (!data) {
-            toast.error("User not found");
-            navigate("/signup");
-        }
-
-        const userData = data.filter((item) => item && item.email === formData.email);
-        const passKey = userData.map((item) => item.password);
-
-        // console.log("password");
-        // console.log(passKey);
-
-        if (passKey[0] === formData.password) {
-            toast.success("Login Successfull");
-            setIsLoggedIn(true);
-            navigate("/");
+        if ((formData.password.length > 0) && (formData.confirmPassword.length > 0) && (formData.password === formData.confirmPassword)) {
+            fetchData(formData);
         }
         else {
-            toast.error("Email or Password Missmatch");
+            toast.error("Password are Missmatch");
             setFormData((prevData) => {
                 return ({
                     ...prevData,
@@ -68,11 +36,40 @@ function LogInPage(props) {
                 })
             })
         }
+
     }
 
-    // useEffect(() => {
-    //     fetchData(formData.email);
-    // }, []);
+    function fetchData() {
+        const data = JSON.parse(window.localStorage.getItem("users"));
+
+        console.log(data);
+
+        if (!data) {
+            toast.error("User not found");
+            navigate("/signup");
+        }
+
+        const userData = data.filter((item) => item && item.email === formData.email);
+        // const passKey = userData.map((item) => item.password)
+
+        console.log(userData);
+        // console.log(passKey);
+
+        if (userData.length > 0) {
+            const userIndex = data.findIndex((item) => item.email === formData.email);
+            console.log(userIndex)
+            data[userIndex].password = formData.password;
+            window.localStorage.setItem("users", JSON.stringify(data));
+            toast.success("Password updated successfully");
+            navigate("/login");
+            console.log("userData : ");
+            console.log(userData);
+        }
+        else {
+            toast.error("User not exsist");
+        }
+
+    }
 
 
     return (
@@ -90,7 +87,7 @@ function LogInPage(props) {
                         className='border border-gray-300  border-b-blue-300 focus:border-blue-400 w-[95%] ml-4 p-2 rounded-md outline-none'
                     />
                     <br />
-                    <label htmlFor="password" className='ml-4 text-start'>Password</label> <br />
+                    <label htmlFor="password" className='ml-4 text-start'>New Password</label> <br />
                     <input type="password"
                         name='password'
                         id='password'
@@ -98,8 +95,17 @@ function LogInPage(props) {
                         value={formData.password}
                         className='border border-gray-300  border-b-blue-300 focus:border-blue-400 w-[95%] ml-4 p-2 rounded-md outline-none'
                     />
+                    <br />
+                    <label htmlFor="confirmPassword" className='ml-4 text-start'>Confirm Password</label> <br />
+                    <input type="password"
+                        name='confirmPassword'
+                        id='confirmPassword'
+                        onChange={changeHandeler}
+                        value={formData.confirmPassword}
+                        className='border border-gray-300  border-b-blue-300 focus:border-blue-400 w-[95%] ml-4 p-2 rounded-md outline-none'
+                    />
                     <NavLink to="/">
-                        <button onClick={submtBtnhandler}
+                        <button onClick={submitBtnhandler}
                             className='text-white bg-blue-700 hover:bg-blue-500 focus:ring-2
                             focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 me-2 mt-2 mb-2 ml-4
                             dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800'
@@ -108,11 +114,6 @@ function LogInPage(props) {
                         </button>
                     </NavLink>
 
-                    <div className='ml-4 mt-2'>
-                        <NavLink to="/forgot-password" className='text-blue-700 hover:underline'>
-                            Forgot Password?
-                        </NavLink>
-                    </div>
 
                 </form>
             </div>
@@ -120,4 +121,4 @@ function LogInPage(props) {
     )
 }
 
-export default LogInPage
+export default ForgetPassword

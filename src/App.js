@@ -14,6 +14,7 @@ import LogOutPage from './Pages/LogOutPage';
 import CartPage from './Pages/CartPage';
 import { useDispatch, useSelector } from 'react-redux';
 import { loggedIn } from './Redux/Slice/AuthSlice';
+import ForgetPassword from './Pages/ForgetPassword';
 
 
 function App() {
@@ -42,6 +43,7 @@ function App() {
         <Route path="/login" element={<LogInPage setIsLoggedIn={setIsLoggedIn} />} />
         <Route path="/logout" element={<LogOutPage setIsLoggedIn={setIsLoggedIn} />} />
         <Route path="/cart" element={<CartPage />} />
+        <Route path="/forgot-password" element={<ForgetPassword />} />
       </Routes>
     </div>
   );
